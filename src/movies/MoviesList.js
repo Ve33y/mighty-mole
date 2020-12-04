@@ -53,7 +53,6 @@ export function MoviesList(){
         <button>search</button> 
       </form>
       {
-        movies &&
         <ul className='movies-list'>
         {movies.map((movie) => {
           return (

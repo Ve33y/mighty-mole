@@ -5,9 +5,9 @@ import { Link, useLocation } from 'react-router-dom';
 
 export function FavsList(){
   const location = useLocation()
-  // console.log(location.state)
+  console.log(location.state)
   return (
-    location.state ? 
+    location.state.length ? 
     <div>
     {location.state.map((movie) => {
       return (
