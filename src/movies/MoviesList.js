@@ -1,5 +1,6 @@
 import { useRef, useState, useReducer } from 'react';
 import { Movie } from './Movie';
+import { Link } from 'react-router-dom';
 
 const API_BASE = `http://omdbapi.com/?s=`
 const API_KEY = `&apikey=`
@@ -9,7 +10,7 @@ export function MoviesList(){
   const [movies, setMovies] = useState([]);
   const [favs, setFavs] = useState(false);
  
-  // TO DO maybe add a button to get favorites
+  // TO DO the first click doesn't make it
   const [favsArray, dispatch] = useReducer((favsArray, { type, value }) => {
     switch (type) {
       case 'add':
@@ -24,6 +25,7 @@ export function MoviesList(){
   const favClicked = () => {
     setFavs(!favs);
   }
+
 
   const fetchData = async (search) => {
     try {
@@ -66,6 +68,12 @@ export function MoviesList(){
         })}
         <div>
           <p> type in fire to get started 🔥 </p>
+          <Link to={{
+            pathname: "/favs",
+            state: favsArray
+          }}> 
+          <button> my favs 💙 </button> 
+          </Link>
         </div>
       </ul>
       }

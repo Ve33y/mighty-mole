@@ -13,7 +13,7 @@ export function Movie({ movie, favs, dispatch, favClicked }){
       onClick={() => {
         favClicked();
         setBlue(!isBlue);
-        dispatch({ type: !favs ? 'add' : 'remove', value: movie.imdbID})
+        dispatch({ type: !favs ? 'add' : 'remove', value: movie})
       }} 
       icon={solidStar} 
       style={{ color: isBlue ? 'steelblue' : 'silver' }} />
