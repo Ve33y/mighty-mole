@@ -1,43 +1,53 @@
 import { useRef, useState } from 'react';
 import { Movie } from './Movie';
 
-const movies = [
-  {
-    "Title":"Citizen Kane",
-    "Year":"1941",
-    "imdbID":"tt0033467",
-    "Type":"movie",
-    "Poster":"https://m.media-amazon.com/images/M/MV5BYjBiOTYxZWItMzdiZi00NjlkLWIzZTYtYmFhZjhiMTljOTdkXkEyXkFqcGdeQXVyNzkwMjQ5NzM@._V1_SX300.jpg"
-  },
-  {
-    "Title":"Solomon Kane",
-    "Year":"2009",
-    "imdbID":"tt0970452",
-    "Type":"movie",
-    "Poster":"https://m.media-amazon.com/images/M/MV5BMTU5NDMwOTkxMV5BMl5BanBnXkFtZTcwMTg5OTM1OA@@._V1_SX300.jpg"
-  },
-]
-
+const API_BASE = `http://omdbapi.com/?s=`
+const API_KEY = `&apikey=`
 
 export function MoviesList(){
+
+  const [movies, setMovies] = useState([]);
+
+  const fetchData = async (search) => {
+    try {
+      const res = await fetch(API_BASE + search + API_KEY + process.env.REACT_APP_API_KEY);
+      const movies = await res.json()
+      setMovies(movies.Search)
+      // console.log(movies)
+    } catch (e) {
+      console.error(e)
+    }
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    fetchData(ref.current.value);
+    e.target.reset();
+  }
 
   const ref = useRef(null);
 
   return(
     <div>
-      <form onSubmit={(e) => {
-        e.preventDefault();
-        console.log(ref.current.value)
-        e.target.reset();
-      }}>
+      <form onSubmit={handleSubmit} className='search'>
         <input ref={ref} /> 
         <button>search</button> 
       </form>
-      <ul>
+      {
+        movies &&
+        <ul className='movies-list'>
         {movies.map((movie) => {
-          return (<Movie key={movie.imdbID} movie={movie}>{movie.Title}</Movie>)
+          return (
+          <Movie 
+            key={movie.imdbID} 
+            movie={movie}>
+          </Movie>)
         })}
+        <div>
+          <p> type in fire to get started 🔥 </p>
+        </div>
       </ul>
+      }
     </div>
   )
 }

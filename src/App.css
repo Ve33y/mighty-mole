@@ -36,3 +36,31 @@
     transform: rotate(360deg);
   }
 }
+
+.movies-list{
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.movies-list img{
+  margin-bottom: 10px;
+  border-width: 0px 5px 0px 5px;
+  border-style: double;
+  border-color: silver;
+  border-radius:40px 40px 60px 60px;
+  width: 75%;
+  box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.search input{
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border-radius: 15px;
+}
+
+.search button{
+  color: rgb(155, 88, 99);
+  background-color: white;
+  border-radius: 15px;
+}

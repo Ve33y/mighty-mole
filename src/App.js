@@ -5,9 +5,7 @@ import { MoviesList } from './movies/MoviesList';
 function App() {
   return (
     <div className="App">
-      <MoviesList>
-
-      </MoviesList>
+      <MoviesList />
     </div>
   );
 }
